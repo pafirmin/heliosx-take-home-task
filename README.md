@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# HeliosX Take-Home Task
+Implementation of a multi-step prescription consultation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Running the app
+1. `git clone git@github.com:pafirmin/heliosx-take-home-task.git`
+2. `cd heliosx-take-home-task`
+3. `npm i`
+4. `npm run dev`
+5. Browse to `localhost:5173`
 
-Currently, two official plugins are available:
+## Notes
+- I decided to implement the multi-step form by representing the questionnaire as an array of JS objects.
+This has the advantage of making it very easy to modify and extend existing consultations, as well as
+create new ones. Additionally, as the data structure is fully serialisable, questionnaires have the 
+potential to be stored in JSON files or an external data store and retrieved for displaying on the
+front-end. The disadvantage is that individual steps cannot be so easily customised (e.g. if a text
+field is needed). This could be implemented fairly easily at first, but before you know it you could
+be building a whole survey library (perhaps that's not such a bad thing depending on the number of
+questionnaires)!
+- The Stepper component could benefit from taking an optional 'wrapper' prop of type ReactElement that
+would wrap the active child. This would allow things like the 'back' button and question counter to
+be moved out of the ConsultationQuestion component.
+- Zod validation was implemented in a bit of a hurry. A more robust implementation might look something
+like `previousDiagnosis: z.union([z.literal('positive diagnosis'), ...])`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
