@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-darkblue text-white">
       <div className="flex justify-between p-4 w-full max-w-screen-lg mx-auto flex-col sm:flex-row">
-        <div className="flex-1">
+        <div className="flex-1 mb-4 sm:mb-0">
           <h5 className="mb-2 font-bold text-center sm:text-left">
             Important links
           </h5>
