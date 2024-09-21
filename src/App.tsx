@@ -1,10 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/layout";
+import Consultation from "./features/consultation";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Layout>
-      <div>hello, world</div>
-    </Layout>
+    <QueryClientProvider client={queryClient}>
+      <Layout>
+        <Consultation />
+      </Layout>
+    </QueryClientProvider>
   );
 }
 
