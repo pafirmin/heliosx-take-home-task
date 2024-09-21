@@ -19,13 +19,11 @@ export const StepperContext = createContext<StepperContextValue | undefined>(
 
 export default function Stepper({ children }: StepperProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const childrenLen = Children.toArray(children).length;
+  const childrenArr = Children.toArray(children);
   const hasPrevStep = currentStep > 0;
-  const hasNextStep = currentStep < childrenLen - 1;
+  const hasNextStep = currentStep < childrenArr.length - 1;
 
   const activeEl = useMemo(() => {
-    const childrenArr = Children.toArray(children);
-
     return childrenArr[currentStep];
   }, [currentStep, children]);
 
@@ -49,7 +47,7 @@ export default function Stepper({ children }: StepperProps) {
         goToPrevStep,
         hasNextStep,
         hasPrevStep,
-        totalSteps: childrenLen,
+        totalSteps: childrenArr.length,
       }}
     >
       {activeEl}
