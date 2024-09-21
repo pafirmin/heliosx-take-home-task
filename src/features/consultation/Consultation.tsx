@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Stepper from "../../components/stepper/Stepper";
-import { api, CreateConsultationDTO } from "../../api/api";
+import {
+  api,
+  CreateConsultationDTO,
+  CreateConsultationSchema,
+} from "../../api/api";
 import ConsultationQuestion from "./components/ConsultationQuestion";
 import { ConsultationQuestionInfo } from "./types/types";
 import ThankYou from "./components/ThankYou";
@@ -103,7 +107,11 @@ export default function Consultation() {
   });
 
   const mutation = useMutation({
-    mutationFn: api.createConsultation,
+    mutationFn: (dto: CreateConsultationDTO) => {
+      const parsed = CreateConsultationSchema.parse(dto);
+
+      return api.createConsultation(parsed);
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
