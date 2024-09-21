@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         yellow: "#fac828",
+        darkblue: "#082135",
       },
     },
   },
